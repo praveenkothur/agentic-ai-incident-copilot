@@ -1,0 +1,961 @@
+[
+  {
+    "scenario_id": "DEV-PAY-001",
+    "expected_class": "payment_timeout",
+    "expected_recommended_action": "Review and simulate rollback to the previous known-good release",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-02T10:00:00Z",
+          "status_code": 500,
+          "message": "Payment API request timeout",
+          "service": "payment",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "Explicit payment timeout with HTTP 500.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-PAY-002",
+    "expected_class": "payment_timeout",
+    "expected_recommended_action": "Review and simulate rollback to the previous known-good release",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-03T10:00:00Z",
+          "status_code": 502,
+          "message": "Payment dependency timed out",
+          "service": "payment",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "Payment timeout with HTTP 502.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-PAY-003",
+    "expected_class": "payment_timeout",
+    "expected_recommended_action": "Review and simulate rollback to the previous known-good release",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-04T10:00:00Z",
+          "status_code": 503,
+          "message": "Payment service request timed out",
+          "service": "checkout",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "Payment timeout appears in message despite checkout service name.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-PAY-004",
+    "expected_class": "payment_timeout",
+    "expected_recommended_action": "Review and simulate rollback to the previous known-good release",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-05T10:00:00Z",
+          "status_code": 500,
+          "message": "Request timed out while calling payment gateway",
+          "service": "checkout",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "Explicit payment timeout without deployment history.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-PAY-005",
+    "expected_class": "payment_timeout",
+    "expected_recommended_action": "Review and simulate rollback to the previous known-good release",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-06T10:00:00Z",
+          "status_code": 504,
+          "message": "Payment authorization timeout",
+          "service": "payment",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "Payment-specific timeout with HTTP 504.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-PAY-006",
+    "expected_class": "payment_timeout",
+    "expected_recommended_action": "Review and simulate rollback to the previous known-good release",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-07T10:00:00Z",
+          "status_code": 500,
+          "message": "Payment processing timed out after retry",
+          "service": "payment",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "Payment timeout after retry.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-HTTP-001",
+    "expected_class": "http_5xx",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-08T10:00:00Z",
+          "status_code": 500,
+          "message": "Internal server error",
+          "service": "checkout",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "HTTP 500 without dependency-specific evidence.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-HTTP-002",
+    "expected_class": "http_5xx",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-09T10:00:00Z",
+          "status_code": 502,
+          "message": "Bad gateway response",
+          "service": "gateway",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "HTTP 502 without payment timeout evidence.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-HTTP-003",
+    "expected_class": "http_5xx",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-10T10:00:00Z",
+          "status_code": 503,
+          "message": "Service temporarily unavailable",
+          "service": "checkout",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "HTTP 503 without deployment history.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-HTTP-004",
+    "expected_class": "http_5xx",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-11T10:00:00Z",
+          "status_code": 504,
+          "message": "Gateway timeout response",
+          "service": "gateway",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "Generic gateway timeout must not be treated as payment timeout.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-HTTP-005",
+    "expected_class": "http_5xx",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-12T10:00:00Z",
+          "status_code": 500,
+          "message": "Unhandled application exception",
+          "service": "checkout",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "Application exception with no dependency evidence.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-HTTP-006",
+    "expected_class": "http_5xx",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-13T10:00:00Z",
+          "status_code": 502,
+          "message": "Upstream connection failure",
+          "service": "inventory",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "Upstream failure without explicit payment evidence.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-INS-001",
+    "expected_class": "insufficient_evidence",
+    "expected_recommended_action": "Continue investigation; do not remediate",
+    "evidence": {
+      "service": "checkout",
+      "logs": [],
+      "deployments": [],
+      "metrics": {
+        "http_5xx_rate": 0.0,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "No logs or deployment evidence.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-INS-002",
+    "expected_class": "insufficient_evidence",
+    "expected_recommended_action": "Continue investigation; do not remediate",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-15T10:00:00Z",
+          "status_code": 200,
+          "message": "Request completed successfully",
+          "service": "checkout",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.0,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "Only successful request evidence.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-INS-003",
+    "expected_class": "insufficient_evidence",
+    "expected_recommended_action": "Continue investigation; do not remediate",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-16T10:00:00Z",
+          "status_code": 404,
+          "message": "Resource not found",
+          "service": "catalog",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.0,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "HTTP 4xx is not an HTTP 5xx failure.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-INS-004",
+    "expected_class": "insufficient_evidence",
+    "expected_recommended_action": "Continue investigation; do not remediate",
+    "evidence": {
+      "service": "checkout",
+      "logs": [],
+      "deployments": [],
+      "metrics": {
+        "http_5xx_rate": 0.0,
+        "request_count": 100
+      },
+      "warnings": [
+        "Elevated latency reported, but no HTTP 5xx log records are available."
+      ]
+    },
+    "rationale": "Metrics and warnings exist but no error logs.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-INS-005",
+    "expected_class": "insufficient_evidence",
+    "expected_recommended_action": "Continue investigation; do not remediate",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-18T10:00:00Z",
+          "status_code": 400,
+          "message": "Invalid request payload",
+          "service": "checkout",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [],
+      "metrics": {
+        "http_5xx_rate": 0.0,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "Client-side HTTP 400 without server error evidence.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-INS-006",
+    "expected_class": "insufficient_evidence",
+    "expected_recommended_action": "Continue investigation; do not remediate",
+    "evidence": {
+      "service": "checkout",
+      "logs": [],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.0,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "Deployment exists but no failure evidence.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-CON-001",
+    "expected_class": "http_5xx",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-20T10:00:00Z",
+          "status_code": 500,
+          "message": "Payment service returned an error; timeout not confirmed",
+          "service": "payment",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": [
+        "Evidence may support multiple interpretations."
+      ]
+    },
+    "rationale": "Payment-related service name alone does not establish a timeout.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-CON-002",
+    "expected_class": "http_5xx",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-21T10:00:00Z",
+          "status_code": 503,
+          "message": "Payment service unavailable",
+          "service": "payment",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": [
+        "Evidence may support multiple interpretations."
+      ]
+    },
+    "rationale": "Payment service failure without explicit timeout evidence.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-CON-003",
+    "expected_class": "http_5xx",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-22T10:00:00Z",
+          "status_code": 500,
+          "message": "Internal server error after payment success",
+          "service": "checkout",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": [
+        "Evidence may support multiple interpretations."
+      ]
+    },
+    "rationale": "Payment success conflicts with an unclassified application error.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-CON-004",
+    "expected_class": "http_5xx",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-23T10:00:00Z",
+          "status_code": 502,
+          "message": "Upstream failure; dependency identity unknown",
+          "service": "gateway",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": [
+        "Evidence may support multiple interpretations."
+      ]
+    },
+    "rationale": "Dependency identity and failure mechanism are unconfirmed.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-GW-001",
+    "expected_class": "http_5xx",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-24T10:00:00Z",
+          "status_code": 504,
+          "message": "Gateway timeout response",
+          "service": "gateway",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "Generic gateway timeout is not explicit payment evidence.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-GW-002",
+    "expected_class": "http_5xx",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-25T10:00:00Z",
+          "status_code": 504,
+          "message": "Upstream request timed out",
+          "service": "gateway",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "Generic upstream timeout without payment context.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-GW-003",
+    "expected_class": "http_5xx",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-26T10:00:00Z",
+          "status_code": 504,
+          "message": "Load balancer timeout",
+          "service": "gateway",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "Load balancer timeout without payment evidence.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-GW-004",
+    "expected_class": "http_5xx",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-27T10:00:00Z",
+          "status_code": 504,
+          "message": "Checkout request exceeded gateway timeout",
+          "service": "checkout",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "Checkout gateway timeout without payment dependency evidence.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-DEP-001",
+    "expected_class": "payment_timeout",
+    "expected_recommended_action": "Review and simulate rollback to the previous known-good release",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-28T10:00:00Z",
+          "status_code": 500,
+          "message": "Payment API request timeout",
+          "service": "payment",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-27T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-29T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": [
+        "Latest deployment timestamp is later than the observed incident."
+      ]
+    },
+    "rationale": "Explicit payment timeout; deployment timestamp ordering requires scrutiny.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-DEP-002",
+    "expected_class": "payment_timeout",
+    "expected_recommended_action": "Review and simulate rollback to the previous known-good release",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "status_code": 502,
+          "message": "Payment dependency timed out",
+          "service": "payment",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "Explicit payment timeout with no deployment records.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-DEP-003",
+    "expected_class": "http_5xx",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-02T10:00:00Z",
+          "status_code": 500,
+          "message": "Internal server error",
+          "service": "checkout",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-03T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-04T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": [
+        "Deployment records occur after the observed incident timestamp."
+      ]
+    },
+    "rationale": "HTTP 5xx with inconsistent deployment timing and no payment timeout.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  },
+  {
+    "scenario_id": "DEV-DEP-004",
+    "expected_class": "http_5xx",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout",
+      "logs": [
+        {
+          "timestamp": "2026-10-03T10:00:00Z",
+          "status_code": 503,
+          "message": "Service unavailable",
+          "service": "checkout",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "timestamp": "2026-10-01T09:00:00Z",
+          "release": "2.3"
+        },
+        {
+          "timestamp": "2026-10-01T10:00:00Z",
+          "release": "2.4"
+        }
+      ],
+      "metrics": {
+        "http_5xx_rate": 0.08,
+        "request_count": 100
+      },
+      "warnings": []
+    },
+    "rationale": "HTTP 5xx where deployment evidence does not establish causality.",
+    "label_provenance": "Researcher-assigned synthetic development label; requires independent review.",
+    "dataset_version": "1.0"
+  }
+]

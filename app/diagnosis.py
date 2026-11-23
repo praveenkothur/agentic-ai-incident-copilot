@@ -1,4 +1,48 @@
 
+import re
+
+
+def _has_confirmed_payment_timeout(log):
+    message = log.get("message", "").lower()
+    service = log.get("service", "").lower()
+
+    has_timeout = (
+        "timeout" in message or "timed out" in message
+    )
+    has_payment = (
+        "payment" in message or "payment" in service
+    )
+
+    if not (has_timeout and has_payment):
+        return False
+
+    negated_timeout = re.search(
+        r"\b(?:timeout|timed out)\s+"
+        r"(?:(?:is|was|has been)\s+)?"
+        r"(?:not|never)\s+"
+        r"(?:confirmed|observed|detected|reported|established)\b",
+        message,
+    )
+
+    explicit_absence = re.search(
+        r"\b(?:no|without)\s+(?:explicit\s+)?"
+        r"(?:payment\s+)?(?:dependency\s+)?"
+        r"(?:request\s+)?(?:timeout|timed out)\b",
+        message,
+    )
+
+    not_a_timeout = re.search(
+        r"\b(?:not|never)\s+(?:a\s+)?"
+        r"(?:payment\s+)?(?:dependency\s+)?"
+        r"(?:request\s+)?(?:timeout|timed out)\b",
+        message,
+    )
+
+    return not (
+        negated_timeout or explicit_absence or not_a_timeout
+    )
+
+
 def diagnose(evidence):
     logs = evidence.get("logs", [])
     deployments = sorted(
@@ -11,18 +55,11 @@ def diagnose(evidence):
         if int(log.get("status_code", 0)) >= 500
     ]
 
-    # A generic timeout or HTTP 504 is not enough.
     # Require explicit payment-related timeout evidence.
+    # Negated or unconfirmed timeout statements are excluded.
     payment_timeouts = [
         log for log in logs
-        if (
-            "timeout" in log.get("message", "").lower()
-            or "timed out" in log.get("message", "").lower()
-        )
-        and (
-            "payment" in log.get("message", "").lower()
-            or "payment" in log.get("service", "").lower()
-        )
+        if _has_confirmed_payment_timeout(log)
     ]
 
     errors_with_timestamps = [

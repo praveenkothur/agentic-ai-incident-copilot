@@ -1,0 +1,56 @@
+{
+  "dataset": "D:\\Webinar\\agentic-ai-incident-copilot\\experiments\\dataset\\diagnosis\\development_scenarios.json",
+  "dataset_type": "synthetic development dataset",
+  "total_scenarios": 30,
+  "correct_predictions": 30,
+  "incorrect_predictions": 0,
+  "accuracy": 1.0,
+  "macro_precision": 1.0,
+  "macro_recall": 1.0,
+  "macro_f1": 1.0,
+  "per_class_metrics": {
+    "payment_timeout": {
+      "support": 8,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "http_5xx": {
+      "support": 16,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "insufficient_evidence": {
+      "support": 6,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    }
+  },
+  "confusion_matrix": {
+    "payment_timeout": {
+      "payment_timeout": 8,
+      "http_5xx": 0,
+      "insufficient_evidence": 0,
+      "unknown": 0,
+      "error": 0
+    },
+    "http_5xx": {
+      "payment_timeout": 0,
+      "http_5xx": 16,
+      "insufficient_evidence": 0,
+      "unknown": 0,
+      "error": 0
+    },
+    "insufficient_evidence": {
+      "payment_timeout": 0,
+      "http_5xx": 0,
+      "insufficient_evidence": 6,
+      "unknown": 0,
+      "error": 0
+    }
+  },
+  "execution_errors": [],
+  "interpretation": "Synthetic development results only; labels require independent review."
+}

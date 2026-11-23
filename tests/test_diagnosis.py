@@ -1,4 +1,4 @@
-from app.diagnosis import diagnose
+﻿from app.diagnosis import diagnose
 
 
 def test_payment_timeout_is_identified():
@@ -70,3 +70,69 @@ def test_http_5xx_without_payment_timeouts():
         "Collect dependency and application telemetry before remediation"
     )
     assert result["error_releases"] == ["2.4"]
+
+
+
+def test_negated_payment_timeout_is_not_identified():
+    evidence = {
+        "service": "checkout-api",
+        "logs": [{
+            "status_code": 500,
+            "message": "Payment service returned an error; timeout not confirmed",
+            "service": "payment",
+            "timestamp": "2026-10-20T10:00:00Z",
+            "release": "2.4",
+        }],
+        "deployments": [],
+        "metrics": {},
+        "warnings": [],
+    }
+
+    result = diagnose(evidence)
+
+    assert "immediate cause is unconfirmed" in result["likely_root_cause"]
+    assert result["recommended_action"] == (
+        "Collect dependency and application telemetry before remediation"
+    )
+
+
+def test_payment_service_error_without_timeout_is_not_payment_timeout():
+    evidence = {
+        "service": "checkout-api",
+        "logs": [{
+            "status_code": 503,
+            "message": "Payment service unavailable",
+            "service": "payment",
+        }],
+        "deployments": [],
+        "metrics": {},
+        "warnings": [],
+    }
+
+    result = diagnose(evidence)
+
+    assert "immediate cause is unconfirmed" in result["likely_root_cause"]
+    assert result["recommended_action"] == (
+        "Collect dependency and application telemetry before remediation"
+    )
+
+
+def test_generic_gateway_timeout_is_not_payment_timeout():
+    evidence = {
+        "service": "checkout-api",
+        "logs": [{
+            "status_code": 504,
+            "message": "Gateway timeout response",
+            "service": "gateway",
+        }],
+        "deployments": [],
+        "metrics": {},
+        "warnings": [],
+    }
+
+    result = diagnose(evidence)
+
+    assert "immediate cause is unconfirmed" in result["likely_root_cause"]
+    assert result["recommended_action"] == (
+        "Collect dependency and application telemetry before remediation"
+    )
