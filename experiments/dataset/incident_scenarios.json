@@ -1,0 +1,582 @@
+[
+  {
+    "scenario_id": "INC-TIMEOUT-001",
+    "ground_truth_class": "payment_dependency_timeout",
+    "expected_recommended_action": "Review and simulate rollback to the previous known-good release",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:05:00Z",
+          "status_code": 500,
+          "message": "Payment API request timeout",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.4",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-TIMEOUT-002",
+    "ground_truth_class": "payment_dependency_timeout",
+    "expected_recommended_action": "Review and simulate rollback to the previous known-good release",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:06:00Z",
+          "status_code": 500,
+          "message": "Payment service timed out after 30 seconds",
+          "release": "2.5"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.5",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-TIMEOUT-003",
+    "ground_truth_class": "payment_dependency_timeout",
+    "expected_recommended_action": "Review and simulate rollback to the previous known-good release",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:07:00Z",
+          "status_code": 500,
+          "message": "Payment gateway connection timeout",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.4",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-TIMEOUT-004",
+    "ground_truth_class": "payment_dependency_timeout",
+    "expected_recommended_action": "Review and simulate rollback to the previous known-good release",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:08:00Z",
+          "status_code": 500,
+          "message": "Upstream payment request timeout",
+          "release": "2.5"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.5",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-TIMEOUT-005",
+    "ground_truth_class": "payment_dependency_timeout",
+    "expected_recommended_action": "Review and simulate rollback to the previous known-good release",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:09:00Z",
+          "status_code": 500,
+          "message": "Payment dependency timed out",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.4",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-TIMEOUT-006",
+    "ground_truth_class": "payment_dependency_timeout",
+    "expected_recommended_action": "Review and simulate rollback to the previous known-good release",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:10:00Z",
+          "status_code": 500,
+          "message": "Checkout payment timeout detected",
+          "release": "2.5"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.5",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-TIMEOUT-007",
+    "ground_truth_class": "payment_dependency_timeout",
+    "expected_recommended_action": "Review and simulate rollback to the previous known-good release",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:11:00Z",
+          "status_code": 500,
+          "message": "Payment API request timed out",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.4",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-TIMEOUT-008",
+    "ground_truth_class": "payment_dependency_timeout",
+    "expected_recommended_action": "Review and simulate rollback to the previous known-good release",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:12:00Z",
+          "status_code": 500,
+          "message": "Payment processing timeout",
+          "release": "2.5"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.5",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-HTTP5XX-001",
+    "ground_truth_class": "http_5xx_unconfirmed",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:13:00Z",
+          "status_code": 500,
+          "message": "Internal server error",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.4",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-HTTP5XX-002",
+    "ground_truth_class": "http_5xx_unconfirmed",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:14:00Z",
+          "status_code": 502,
+          "message": "Bad gateway response",
+          "release": "2.5"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.5",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-HTTP5XX-003",
+    "ground_truth_class": "http_5xx_unconfirmed",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:15:00Z",
+          "status_code": 503,
+          "message": "Service temporarily unavailable",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.4",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-HTTP5XX-004",
+    "ground_truth_class": "http_5xx_unconfirmed",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:16:00Z",
+          "status_code": 504,
+          "message": "Gateway timeout response",
+          "release": "2.5"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.5",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-HTTP5XX-005",
+    "ground_truth_class": "http_5xx_unconfirmed",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:17:00Z",
+          "status_code": 500,
+          "message": "Application returned HTTP 500",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.4",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-HTTP5XX-006",
+    "ground_truth_class": "http_5xx_unconfirmed",
+    "expected_recommended_action": "Collect dependency and application telemetry before remediation",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:18:00Z",
+          "status_code": 503,
+          "message": "Upstream service returned HTTP 503",
+          "release": "2.5"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.5",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-INSUFFICIENT-001",
+    "ground_truth_class": "insufficient_evidence",
+    "expected_recommended_action": "Continue investigation; do not remediate",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:19:00Z",
+          "status_code": 200,
+          "message": "Health check succeeded",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.4",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-INSUFFICIENT-002",
+    "ground_truth_class": "insufficient_evidence",
+    "expected_recommended_action": "Continue investigation; do not remediate",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:20:00Z",
+          "status_code": 200,
+          "message": "Checkout request completed successfully",
+          "release": "2.5"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.5",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-INSUFFICIENT-003",
+    "ground_truth_class": "insufficient_evidence",
+    "expected_recommended_action": "Continue investigation; do not remediate",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:21:00Z",
+          "status_code": 200,
+          "message": "Application returned HTTP 200",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.4",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-INSUFFICIENT-004",
+    "ground_truth_class": "insufficient_evidence",
+    "expected_recommended_action": "Continue investigation; do not remediate",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:22:00Z",
+          "status_code": 404,
+          "message": "Client request returned HTTP 404",
+          "release": "2.5"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.5",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-INSUFFICIENT-005",
+    "ground_truth_class": "insufficient_evidence",
+    "expected_recommended_action": "Continue investigation; do not remediate",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:23:00Z",
+          "status_code": 200,
+          "message": "Service is responding normally",
+          "release": "2.4"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.4",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  },
+  {
+    "scenario_id": "INC-INSUFFICIENT-006",
+    "ground_truth_class": "insufficient_evidence",
+    "expected_recommended_action": "Continue investigation; do not remediate",
+    "evidence": {
+      "service": "checkout-api",
+      "logs": [
+        {
+          "service": "checkout-api",
+          "timestamp": "2026-11-22T10:24:00Z",
+          "status_code": 200,
+          "message": "No active application errors observed",
+          "release": "2.5"
+        }
+      ],
+      "deployments": [
+        {
+          "service": "checkout-api",
+          "release": "2.5",
+          "timestamp": "2026-11-22T09:00:00Z"
+        }
+      ],
+      "metrics": {
+        "source": "simulated_fixture",
+        "http_5xx_rate": null
+      },
+      "warnings": []
+    }
+  }
+]

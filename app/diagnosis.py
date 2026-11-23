@@ -1,82 +1,136 @@
-from typing import Any
 
-
-def diagnose(evidence: dict[str, Any]) -> dict[str, Any]:
+def diagnose(evidence):
     logs = evidence.get("logs", [])
     deployments = sorted(
         evidence.get("deployments", []),
-        key=lambda item: item.get("timestamp", ""),
+        key=lambda x: x.get("timestamp", ""),
     )
-    errors = [x for x in logs if int(x.get("status_code", 0)) >= 500]
-    timeouts = [
-        x for x in logs
-        if "timeout" in x.get("message", "").lower()
-        or "timed out" in x.get("message", "").lower()
-    ]
-    latest_release = deployments[-1].get("release", "unknown") if deployments else "unknown"
 
-    error_releases = {x.get("release") for x in errors}
-    latest_deploy_time = deployments[-1].get("timestamp") if deployments else None
-    errors_after_latest_deploy = [
-        x for x in errors
-        if latest_deploy_time and x.get("timestamp", "") >= latest_deploy_time
+    errors = [
+        log for log in logs
+        if int(log.get("status_code", 0)) >= 500
     ]
 
-    if errors and timeouts:
-        cause = (
-            "Payment dependency timeouts are the observed failure mechanism. "
-            "The latest deployment may be a trigger, but the supplied evidence "
-            "does not prove causation."
+    # A generic timeout or HTTP 504 is not enough.
+    # Require explicit payment-related timeout evidence.
+    payment_timeouts = [
+        log for log in logs
+        if (
+            "timeout" in log.get("message", "").lower()
+            or "timed out" in log.get("message", "").lower()
         )
-        confidence = 0.78 if errors_after_latest_deploy else 0.62
-        action = "Review and simulate rollback to the previous known-good release"
-    elif errors:
-        cause = "HTTP 5xx responses were observed, but the immediate cause is unconfirmed."
-        confidence = 0.42
-        action = "Collect dependency and application telemetry before remediation"
-    else:
-        cause = "Insufficient evidence to identify an active failure."
-        confidence = 0.15
-        action = "Continue investigation; do not remediate"
-
-    evidence_items = [
-        {
-            "source": "application_logs",
-            "observation": f"{len(logs)} log records inspected; {len(errors)} HTTP 5xx responses found.",
-        },
-        {
-            "source": "dependency_logs",
-            "observation": f"{len(timeouts)} payment timeout records found.",
-        },
-        {
-            "source": "deployment_history",
-            "observation": (
-                f"Latest release is {latest_release}; "
-                f"{len(errors_after_latest_deploy)} errors have timestamps at or after its deployment."
-            ),
-        },
-        {
-            "source": "metrics",
-            "observation": f"Metrics source: {evidence.get('metrics', {}).get('source', 'unknown')}.",
-        },
+        and (
+            "payment" in log.get("message", "").lower()
+            or "payment" in log.get("service", "").lower()
+        )
     ]
+
+    errors_with_timestamps = [
+        log for log in errors if log.get("timestamp")
+    ]
+
+    latest_release = deployments[-1] if deployments else None
+
+    latest_release_name = (
+        latest_release.get("release") if latest_release else None
+    )
+
+    error_releases = sorted({
+        log.get("release")
+        for log in errors
+        if log.get("release")
+    })
+
+    warnings = evidence.get("warnings", [])
+
+    if errors and payment_timeouts:
+        confidence = 0.78 if latest_release_name else 0.62
+
+        return {
+            "likely_root_cause": (
+                "Payment dependency timeouts are the observed failure mechanism."
+            ),
+            "confidence": confidence,
+            "evidence": [
+                {
+                    "observation": (
+                        f"{len(payment_timeouts)} payment timeout records found."
+                    )
+                },
+                {
+                    "observation": (
+                        f"{len(errors)} HTTP 5xx errors found."
+                    )
+                },
+                {
+                    "observation": (
+                        f"{len(errors_with_timestamps)} errors have timestamps."
+                    )
+                },
+            ],
+            "alternative_hypotheses": [
+                "Configuration or timeout change in the latest release",
+                "Transient payment dependency failure",
+            ],
+            "recommended_action": (
+                "Review and simulate rollback to the previous known-good release"
+            ),
+            "risk": "high",
+            "latest_release": latest_release_name,
+            "error_releases": error_releases,
+            "warnings": warnings,
+        }
+
+    if errors:
+        return {
+            "likely_root_cause": (
+                "HTTP 5xx errors detected; immediate cause is unconfirmed."
+            ),
+            "confidence": 0.42,
+            "evidence": [
+                {
+                    "observation": f"{len(errors)} HTTP 5xx errors found."
+                },
+                {
+                    "observation": (
+                        "No explicit payment dependency timeout evidence found."
+                    )
+                },
+                {
+                    "observation": (
+                        f"{len(errors_with_timestamps)} errors have timestamps."
+                    )
+                },
+            ],
+            "alternative_hypotheses": [
+                "Application exception",
+                "Gateway or upstream service failure",
+                "Dependency latency or connectivity issue",
+            ],
+            "recommended_action": (
+                "Collect dependency and application telemetry before remediation"
+            ),
+            "risk": "medium",
+            "latest_release": latest_release_name,
+            "error_releases": error_releases,
+            "warnings": warnings,
+        }
 
     return {
-        "summary": f"Investigated {len(logs)} log records for {evidence.get('service', 'unknown service')}.",
-        "likely_root_cause": cause,
-        "confidence": confidence,
-        "evidence": evidence_items,
-        "alternative_hypotheses": [
-            "Payment API degradation unrelated to the release",
-            "Configuration or timeout change in the latest release",
-            "Network connectivity issue between checkout and payment",
+        "likely_root_cause": "Insufficient evidence to identify a failure.",
+        "confidence": 0.15,
+        "evidence": [
+            {
+                "observation": "No HTTP 5xx records found."
+            }
         ],
-        "recommended_action": action,
-        "risk": (
-            "A real rollback can cause compatibility or data issues. "
-            "Validate release compatibility and obtain change approval before any production action."
-        ),
-        "latest_release": latest_release,
-        "error_releases": sorted(str(x) for x in error_releases if x is not None),
-        "warnings": evidence.get("warnings", []),
+        "alternative_hypotheses": [
+            "Insufficient application telemetry",
+            "Intermittent or unobserved failure",
+        ],
+        "recommended_action": "Continue investigation; do not remediate",
+        "risk": "low",
+        "latest_release": latest_release_name,
+        "error_releases": error_releases,
+        "warnings": warnings,
     }
