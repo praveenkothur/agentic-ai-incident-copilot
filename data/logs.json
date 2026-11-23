@@ -1,0 +1,8 @@
+[
+  {"timestamp":"2026-10-27T09:00:00Z","release":"v2.3","service":"checkout-api","level":"INFO","message":"Payment request succeeded","status_code":200,"latency_seconds":0.35},
+  {"timestamp":"2026-10-27T09:01:00Z","release":"v2.3","service":"checkout-api","level":"INFO","message":"Payment request succeeded","status_code":200,"latency_seconds":0.40},
+  {"timestamp":"2026-10-27T09:05:00Z","release":"v2.4","service":"checkout-api","level":"ERROR","message":"Payment dependency timed out","status_code":500,"latency_seconds":2.4},
+  {"timestamp":"2026-10-27T09:05:10Z","release":"v2.4","service":"checkout-api","level":"ERROR","message":"Payment dependency timed out","status_code":500,"latency_seconds":2.6},
+  {"timestamp":"2026-10-27T09:05:20Z","release":"v2.4","service":"checkout-api","level":"ERROR","message":"Payment dependency timed out","status_code":500,"latency_seconds":2.3},
+  {"timestamp":"2026-10-27T09:05:30Z","release":"v2.4","service":"checkout-api","level":"INFO","message":"Payment request succeeded","status_code":200,"latency_seconds":0.45}
+]

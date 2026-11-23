@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+langgraph
+langgraph-checkpoint-sqlite
+pydantic
+httpx
+requests
+prometheus-client
+pytest
+pytest-cov
+python-dotenv
+langchain-ollama

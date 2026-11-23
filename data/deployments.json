@@ -1,0 +1,4 @@
+[
+  {"timestamp":"2026-10-27T08:55:00Z","service":"checkout-api","release":"v2.3","event":"deployment_completed"},
+  {"timestamp":"2026-10-27T09:04:30Z","service":"checkout-api","release":"v2.4","event":"deployment_completed"}
+]
